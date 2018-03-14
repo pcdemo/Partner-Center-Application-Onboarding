@@ -1,13 +1,13 @@
 {
 	"info": {
 		"name": "Partner Center (Onboarding)",
-		"_postman_id": "fe995bc1-a946-4a71-ae64-688db399d3d2",
+		"_postman_id": "24bab642-53bb-4b60-9f88-e0d60b017979",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "0. User+App Authentication Auto",
+			"name": "0. App+User Authentication",
 			"event": [
 				{
 					"listen": "test",
@@ -63,8 +63,7 @@
 						},
 						{
 							"key": "client_secret",
-							"value": "{{PC_CLIENT_SECTRET}}",
-							"description": "",
+							"value": "{{PC_CLIENT_SECRET}}",
 							"type": "text"
 						}
 					]
@@ -136,7 +135,7 @@
 						"customers"
 					]
 				},
-				"description": ""
+				"description": null
 			},
 			"response": []
 		},
@@ -189,7 +188,10 @@
 						"value": "application/json"
 					}
 				],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "https://api.partnercenter.microsoft.com/v1/offers?country=us",
 					"protocol": "https",
@@ -211,7 +213,7 @@
 						}
 					]
 				},
-				"description": ""
+				"description": null
 			},
 			"response": []
 		},
@@ -258,7 +260,7 @@
 			"response": []
 		},
 		{
-			"name": "Get Customer",
+			"name": "4.1 Get Customer by Id",
 			"event": [
 				{
 					"listen": "test",
@@ -283,7 +285,10 @@
 						"value": "application/json"
 					}
 				],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "https://api.partnercenter.microsoft.com/v1/customers/{{CUSTOMER_TenantID}}",
 					"protocol": "https",
@@ -300,6 +305,47 @@
 					]
 				},
 				"description": "Get Customer\nhttps://msdnstage.redmond.corp.microsoft.com/en-us/library/partnercenter/mt634680.aspx"
+			},
+			"response": []
+		},
+		{
+			"name": "4.2 Find Customer By Domain",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{ACCESS_TOKEN_PC}}"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://api.partnercenter.microsoft.com/v1/customers/?filter={Field:'DefaultDomainName', Value:'Sample', Operator:'StartsWith'}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"partnercenter",
+						"microsoft",
+						"com"
+					],
+					"path": [
+						"v1",
+						"customers",
+						""
+					],
+					"query": [
+						{
+							"key": "filter",
+							"value": "{Field:'DefaultDomainName', Value:'Sample', Operator:'StartsWith'}",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
 			},
 			"response": []
 		}
